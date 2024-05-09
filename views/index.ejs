@@ -1,0 +1,34 @@
+<div class="authur">
+  <h1 class="authur__heading">Hi I am Mercy.</h1>
+  <p class="authur__body">Web developer and content creator.</p>
+</div>
+
+<img
+  src="/images/IMG_1887.HEIC33.jpg2.jpg"
+  alt="person looking out through window"
+  class="hero-image"
+  width="981"
+  height="528"
+/>
+
+<section class="articles">
+  <h2 class="articles__heading">Latest Posts</h2>
+
+  <ul class="article-ul">
+    <% data.forEach(post => { %>
+
+    <li>
+      <a href="/post/<%= post._id %>">
+        <span><%= post.title %></span>
+        <span class="article-list__date"
+          ><%= post.createdAt.toDateString() %></span
+        >
+      </a>
+    </li>
+    <% }) %>
+  </ul>
+
+  <% if (nextPage !== null) { %>
+  <a href="/?page=<%=nextPage  %>" class="pagination">&lt; View Older Post</a>
+  <% } %>
+</section>
