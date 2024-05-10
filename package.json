@@ -10,7 +10,6 @@
   "author": "mercy.io",
   "license": "ISC",
   "keywords": [],
-  "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "connect-mongo": "^5.1.0",
@@ -21,6 +20,8 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
     "mongoose": "^8.3.4"
-  }
+  },
+  "description": ""
 }

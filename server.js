@@ -2,13 +2,14 @@ require ('dotenv').config();
 
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
-// const methodOverride = require('method-override');
+const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
 
 const connectDb = require('./app/config/database')
+const {isActiveRoute } = require('./app/helpers/routeHelpers');
 
 const app = express()
 const PORT = process.env.PORT || 5000;
@@ -16,11 +17,12 @@ const PORT = process.env.PORT || 5000;
 // connect to db
 connectDb();
 
-// i used it so that i can get the searchTerm
+// i used it so that i can get the searchTerm (middleware)
 app.use(express.urlencoded ( { extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(methodOverride('_method'));
+ 
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -40,6 +42,7 @@ app.set('layout', './layouts/main')
 app.set('view engine', 'ejs')
 
   
+app.locals.isActiveRoute = isActiveRoute;
 // Routes 
 app.use('/', require('./app/routes/main'))
 app.use('/', require('./app/routes/admin'))
