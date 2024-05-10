@@ -7,7 +7,7 @@ const Post = require('../models/post');
 router.get('', async (req, res) => {
   try {
     const locals = {
-      title: "NodeJs Blog",
+      title: "Blog.blend",
       description: "Simple Blog created with NodeJs, Express & MongoDb."
     }
 
@@ -55,40 +55,45 @@ router.get('', async (req, res) => {
 
 
 /**
- * GET /
- * POST :id
+ * POST /
+ * Post - searchTerm
 */
 
 router.post('/search', async (req, res) => {
-    
-    try{
-      const locals = {
-        title: "Search",
-        description: "Simple Blog created with Nodejs, Express and Mongodb.",
-        currentRoute: '/'
+  try {
+    const locals = {
+      title: "Search",
+      description: "Simple Blog created with NodeJs, Express & MongoDb."
     }
 
     let searchTerm = req.body.searchTerm;
-    const searchNoSpecialCharacter = searchTerm.replace(/[^a-zA-Z0-9 ]/g, "");
+    const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9 ]/g, "")
 
     const data = await Post.find({
       $or: [
-        {title: { $regex: new RegExp(searchNoSpecialCharacter, 'i')}},
-        {body: { $regex: new RegExp(searchNoSpecialCharacter, 'i')}}
-
+        { title: { $regex: new RegExp(searchNoSpecialChar, 'i') }},
+        { body: { $regex: new RegExp(searchNoSpecialChar, 'i') }}
       ]
-    })
+    });
 
     res.render("search", {
       data,
-      locals
+      locals,
+      currentRoute: '/'
     });
-    
-    }catch(err){
-    console.log(err)
-    }
-})
 
+  } catch (error) {
+    console.log(error);
+  }
+
+});
+
+
+/**
+ * GET /
+ * Get - blog
+*/
+// get blog post when u click on them
 router.get('/post/:id', async (req, res) => {
     try{
        
@@ -99,17 +104,21 @@ router.get('/post/:id', async (req, res) => {
         const data = await Post.findById({ _id: slug});
         
         const locals = {
-          title: "data.title",
+          title: data.title,
           description: "Simple Blog created with Nodejs, Express and Mongodb.",
-        currentRoute: `/post/${slug}`
 
       }
 
-        res.render('post', {locals, data});
+        res.render('post', {
+          locals,
+          data,
+          currentRoute: `/post/${slug}`
+
+        });
         }catch(err){
         console.log(err)
         }
-    })
+    });
 
 
 

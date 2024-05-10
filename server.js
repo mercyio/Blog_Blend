@@ -30,7 +30,7 @@ app.use(session({
     store: MongoStore.create({
       mongoUrl: process.env.DB_URL
     }),
-    //cookie: { maxAge: new Date ( Date.now() + (3600000) ) } 
+    cookie: { maxAge: new Date ( Date.now() + (3600000) ) } 
   }));
 
 // static folder

@@ -51,6 +51,26 @@ router.get('/admin', async (req, res) => {
  * GET /
  * POST :id
 */
+// admin register page
+router.get('/register', async (req, res) => {
+   
+  try{
+
+      const locals = {
+          title: "Admin",
+          description: "Simple Blog created with Nodejs, Express and Mongodb."
+      }
+
+  res.render('admin/register', {locals, layout: adminLayout});
+  }catch(err){
+  console.log(err)
+  }
+})
+
+/**
+ * GET /
+ * POST :id
+*/
 // admin check login
 // router.post('/admin', async (req, res) => {
 //     try {
@@ -98,26 +118,28 @@ router.post('/admin', async (req, res) => {
 // */
 
 // user register
-// router.post('/register', async (req, res) => {
-//     try {
-//       const { username, password } = req.body;
-//       const hashedPassword = await bcrypt.hash(password, 10);
-  
-//       try {
-//         const user = await User.create({ username, password:hashedPassword });
-//         res.status(201).json({ message: 'User Created', user });
-//         console.log('created')
-//       } catch (error) {
-//         if(error.code === 11000) {
-//           res.status(409).json({ message: 'User already in use'});
-//         }
-//         res.status(500).json({ message: 'Internal server error'})
-//       }
-  
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   });
+router.post('/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    try {
+      const user = await User.create({ username, password: hashedPassword });
+      res.redirect('/dashboard');
+    } catch (error) {
+      if (error.code === 11000) {
+        res.status(409).json({ message: 'User already in use' });
+      } else {
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 /**
  * GET /

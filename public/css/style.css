@@ -41,6 +41,9 @@ textarea {
   margin-bottom: 1rem;
 }
 
+a{
+  text-decoration: none;
+}
 .btn {
   background-color: var(--black);
   border: none;
@@ -322,7 +325,8 @@ img {
   position: absolute;
   top: 0;
   right: 0;
-  color: var(--gray-light);
+  color: black;
+  /* color: var(--gray-light); */
   padding: 15px;
 }
 
