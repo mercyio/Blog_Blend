@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap'); */
 
 :root {
   --black: #1c1c1c;
@@ -234,7 +234,7 @@ img {
 .article-ul li {
   font-size: 24px;
   cursor: pointer;
-  transition: filter 0.1s;
+  transition: filter 0.5s;
 }
 
 .article-ul li:not(:last-child) {
@@ -341,4 +341,10 @@ img {
 
 .pagination:hover {
   color: var(--black);
+}
+
+.black{
+  background-color: black;
+  max-width: 200px;
+  min-height: 200px;
 }

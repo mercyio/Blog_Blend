@@ -7,10 +7,10 @@ const Post = require('../models/post');
 router.get('', async (req, res) => {
   try {
     const locals = {
-      title: "Blog.blend",
+      title: "simplyWrite",
       description: "Simple Blog created with NodeJs, Express & MongoDb."
     }
-
+ 
     let perPage = 3;
     let page = req.query.page || 1;
 
