@@ -15,22 +15,22 @@ const app = express()
 const PORT = process.env.PORT || 5000;
 
 // connect to db
-connectDb();
+connectDb(); 
 
-// i used it so that i can get the searchTerm (middleware)
+// i used this so that i can get the searchTerm (middleware)
 app.use(express.urlencoded ( { extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(methodOverride('_method'));
  
 app.use(session({
-    secret: 'keyboard cat',
+    secret: process.env.PORT,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
       mongoUrl: process.env.DB_URL
     }),
-    cookie: { maxAge: new Date ( Date.now() + (3600000) ) } 
+    cookie: { maxAge: 3600000} 
   }));
 
 // static folder
