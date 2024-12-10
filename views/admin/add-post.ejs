@@ -1,6 +1,6 @@
-<a href="/dashboard"> &lAarr; Back </a>
+<a href="/articles"> &lAarr; Back </a>
 <div class="admin-title">
-  <h2>Add New Post</h2>
+  <h2>Add New Article</h2>
 </div>
 
 <form action="/add-post" method="POST">
@@ -9,6 +9,13 @@
 
   <label for="body"><b>Content</b></label>
   <textarea name="body" cols="50" rows="10" id=""></textarea>
+
+  <label for="tags"><b>Tags</b></label>
+  <input type="text" placeholder="eg #hello #awesome" name="tags" />
+
+  <label for="image"><b>Upload Image</b></label>
+  <input type="file" name="image" accept="image/*" /> <br />
+  <br />
 
   <input type="submit" value="Add" class="btn" />
 </form>

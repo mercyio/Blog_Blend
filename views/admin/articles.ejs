@@ -1,3 +1,24 @@
+<!-- <header>
+  <h1>All articles</h1>
+  <p>Here's a list of all my great articles</p>
+</header>
+<main>
+  <div class="articles">
+    <% data.forEach(article => { %>
+      <div class="article">
+        <img src="<%= article.image %>" alt="Article Image">
+        <h2><%= article.title %></h2>
+        <p><%= article.description %></p>
+        <div class="tags">
+          <% article.tags.forEach(tag => { %>
+            <span class="tag"><%= tag %></span>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</main>
+
 <section class="articles">
     <h2 class="articles__heading">Latest Posts</h2>
   
@@ -16,4 +37,56 @@
     <% if (nextPage !== null) { %>
     <a href="/?page=<%=nextPage  %>" class="pagination">&lt; View Older Post</a>
     <% } %>
-  </section>
+  </section> -->
+
+<header class="v2-header">
+  <h1>All articles</h1>
+  <p>Here's a list of all my great articles</p>
+</header>
+<main class="v2-main">
+  <div class="v2-articles">
+    <% data.forEach(post => { %>
+    <div class="v2-article">
+      <div>
+        <a href="/post/<%= post._id %>" class="v2-article-ul__link">
+          <img src="<%= post.image %>" alt="Article Image" 
+          class="v2-article__image" />
+        </a>
+      </div>
+      <div class="v2-article_sec2">
+        <a href="/post/<%= post._id %>" class="v2-article-ul__link">
+          <h2 class="v2-article__title"><%= post.title %></h2>
+        </a>
+        <p class="v2-article__body"><%= post.body %></p>
+        <% if (post.tags && Array.isArray(post.tags)) { %>
+        <div class="v2-tags">
+          <a href="/post/<%= post._id %>" class="v2-article-ul__link">
+            <% post.tags.forEach(tag => { %>
+            <span class="v2-tag"><%= tag %></span>
+            <% }) %>
+          </a>
+        </div>
+      </div>
+
+      <% } %>
+    </div>
+    <% }) %>
+  </div>
+</main>
+
+<!-- <section class="v2-articles-section">
+  <h2 class="v2-articles__heading">Latest Posts</h2>
+  <ul class="v2-article-ul">
+    <% data.forEach(post => { %>
+    <li class="v2-article-ul__item">
+      <a href="/post/<%= post._id %>" class="v2-article-ul__link">
+        <span class="v2-article-ul__title"><%= post.title %></span>
+        <span class="v2-article-ul__date"><%= post.createdAt.toDateString() %></span>
+      </a>
+    </li>
+    <% }) %>
+  </ul>
+  <% if (nextPage !== null) { %>
+  <a href="/?page=<%= nextPage %>" class="v2-pagination">&lt; View Older Posts</a>
+  <% } %>
+</section> -->

@@ -9,15 +9,16 @@
 
 <form action="/edit-post/<%= data._id %>?_method=PUT" method="POST">
   <label for="title"><b>Title</b></label>
-  <input
-    type="text"
-    placeholder="Post Title"
-    name="title"
-    value="<%= data.title %>"
-  />
+  <input type="text" placeholder="Post Title" name="title" value="<%= data.title %>" />
 
   <label for="body"><b>Content</b></label>
   <textarea name="body" cols="50" rows="10"><%= data.body %></textarea>
+
+  <label for="tags"><b>Tags</b></label>
+  <input type="text" placeholder="enter tags" name="tags" value="<%= data.tags %>" />
+
+  <label for="image"><b>Upload Image</b></label>
+  <input type="file" name="image" accept="image/*" value="<%= data.image %>" /><br /><br />
 
   <input type="submit" value="Update" class="btn" />
 </form>
