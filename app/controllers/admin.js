@@ -142,8 +142,18 @@ const addPost = (authMiddleware, async (req, res) => {
 //  * Admin Create new post POST
 const createPost = (authMiddleware, async (req, res) => {
     try {
-        const { title, body } = req.body;
-        const newPost = new Post({ title, body, userId: req.userId });
+        // const tags
+        // const newPost = await Post.create(
+        //     const tagsInput = req.body.tags.trim();
+        //     const tags = tagsInput.startsWith('#') ? 
+        //       tagsInput.split('#').slice(1).map(tag => tag.trim()).filter(tag => tag !== '') : 
+        //       [];
+        //     {
+        //        title: req.body.title,
+        //         body: req.body.body,
+        //         tags:
+        //         image: req.body.image
+        //     }) 
         // await Post.create(newPost)
         await newPost.save(); 
         res.redirect('dashboard');
@@ -156,7 +166,7 @@ const createPost = (authMiddleware, async (req, res) => {
 const editPost = (authMiddleware, async (req, res) => {
     try {
         const locals = {
-            tittle: 'Add Post',
+            title: 'Add Post',
             description: 'Simple blog mae with express and mongodb'
         }
         const data = await Post.findOne({ _id: req.params.id })
@@ -178,12 +188,13 @@ const edit = (authMiddleware, async (req, res) => {
      {
         title: req.body.title,
          body: req.body.body,
-        isEdited: true,
-        createdAt: Date.now()
+         tags : req.body.tags.split('#').map(tag => tag.trim()), 
+         image: req.body.image
+
      }) 
     res.redirect('/dashboard')    
     } catch (error) {
-    console.log(error)
+    console.log(error) 
  }
 })
 
@@ -212,7 +223,7 @@ const articles = async (req, res) => {
             title: 'Articles',
             description: 'Simple blog made with express and mongodb'
         };
-        const limit = 10; // number of posts per page
+        const limit = 10; 
         const page = req.query.page? parseInt(req.query.page) : 1;
         const skip = (page - 1) * limit;
         const count = await Post.countDocuments();
@@ -230,6 +241,38 @@ const articles = async (req, res) => {
     }
 };
     
+
+// const dashboard2 = (async (req, res) => { 
+    // try {
+    //     const locals = {
+    //         tittle: 'Add Post',
+    //         description: 'Simple blog mae with express and mongodb'
+    //     }   
+    // }catch(error){
+    //     console.log(error)
+    // }
+//     {
+//         title: 'Nuxt Content v2 is awesome!',
+//             description: 'This is my first article!',
+//                 tags: ['Nuxt', 'Content', 'Learning', 'first'],
+//                     image: 'https://via.placeholder.com/150'
+//     }
+//     {
+//         title: 'This is my second article!',
+//             description: 'Guess what? Nuxt content is awesome!',
+//                 tags: ['Nuxt', 'Content', 'Learning', 'second'],
+//                     image: 'https://via.placeholder.com/150'
+//     }
+//     {
+//         title: 'This is my third article!',
+//             description: 'You finally got the point about Nuxt content',
+//                 tags: ['Nuxt', 'Content', 'Learning', 'third'],
+//                     image: 'https://via.placeholder.com/150'
+//     }
+//     res.render('index', { articles });
+
+//   });
+  
 
 // const adminLogin = (async (req, res) {
 //     const { username, password } = req.body
